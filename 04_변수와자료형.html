@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>04. 변수와 자료형</title>
+        <style>
+            #area1{
+                height: 150px;
+                border : 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>변수와 자료형</h1>
+        <h3>변수 선언</h3>
+        <pre>
+            &lt;script&gt;
+                변수명; // 전역 변수(global)
+
+                var 변수명; // 전역 변수(global)
+
+                function 함수명(){
+                    변수명; // 전역 변수(global)
+
+                    var 변수명; // 지역 변수(local)
+                }
+            &lt;/script&gt;
+
+            * 전역 변수명과 지역 변수명이 같을 경우 
+            - 함수 내에서 변수명 호출 시 지역 변수가 우선권을 가짐. 
+            - 전역변수 호출 시 this.변수명 또는 window.변수명으로 
+              지역 변수와 구분 가능.
+        </pre>
+
+        <h3>window 객체</h3>
+        <p>
+            웹 브라우저에서 제공하는 창(window) 자체를 나타내는 객체
+        </p>
+
+        <script>
+            // 전역 변수 선언 
+            str1 = "전역 변수";  // 자동으로 window 객체의 필드로 추가됨.
+            
+            // script 태그 바로 하위에 작성된 var 변수는 전역 변수이다.
+            var str2 = "var 전역 변수";
+            function varTest(){
+                // 전역변수와 동일한 변수명을 가진 지역변수 선언
+                var str1 = "지역 변수"; // 지역변수는 특정 지역 내에서 var 키워드 붙여서 선언함.
+
+                console.log("str1 호출");
+                console.log(str1); // 지역 (가까운게 먼저)
+                console.log(this.str1); // 전역 
+                console.log(window.str1); // 전역 
+                console.log("---------------------")
+
+                console.log("str2 호출");
+                console.log(str2); // var 전역 변수
+                console.log(this.str2); // var 전역 변수 
+                console.log(window.str2); // var 전역 변수
+                console.log("---------------------")
+           
+
+            // 지역 변수 선언
+            var str3 = "새로운 지역 변수";
+
+            console.log("str3 호출");
+            console.log(str3); // 새로운 지역 변수
+            console.log(this.str3); // undefined ->str3 라는 변수가 전역 변수로 정의되어 있지 않음.
+            console.log(window.str3); // undefined
+            console.log("---------------------")
+
+            // 함수 또는 특정 지역 내에서 
+            // var 키워드 없이 변수를 선언하면 전역변수가 된다.
+            str4 = "새로운 전역 변수";
+
+            console.log("str4 호출");
+            console.log(str4); // 새로운 전역 변수
+            console.log(this.str4); // 새로운 전역 변수
+            console.log(window.str4); // 새로운 전역 변수
+            console.log("---------------------")
+
+        }
+            varTest(); // varTest() 함수를 페이지 로딩 중 호출 
+
+
+        </script>
+
+        <hr>
+
+
+
+        
+        <h3>window.onload 함수</h3>
+        <p>페이지가 로드가 완료된 후 실행될 함수를 지정</p>
+        <p id="p1">window.onload 테스트1</p>
+
+        <script>
+            // 1. html 문서 로딩 중 코드를 수행하는 경우 
+            // var p1 = document.getElementById("p1");
+            // var p2 = document.getElementById("p2");
+
+            // console.log(p1);
+            // console.log(p2);
+            // // p2의 값이 null이 나오는 이유 
+            // -> html문서는 기본적으로 위에서 아래로 로딩이 됨 .
+            // -> script 태그 코드가 로딩되기 전에 p1 요소는 로딩이 되어있어
+            //    요소를 얻어와 console로 출력이 가능하지만 , 
+            // -> p2 요소는 아직 로딩이 진행되지 않아서 요소를 얻어 올 수 없음.
+
+
+            window.onload = function(){        
+            var p1 = document.getElementById("p1");
+            var p2 = document.getElementById("p2");
+
+            console.log(p1);
+            console.log(p2);
+            
+            }
+
+            // window.onload는 페이지 내에서 한 번만 작성할 수 있다.
+
+
+        </script>
+        <p id="p2">window.onload 테스트2</p>
+
+
+
+
+
+        <hr>
+        <h2>자바 스크립트 자료형</h2>
+        <p>
+            기본적으로 자바 스크립트는 변수 선언 시 별도의 자료형을 지정하지 않는다.<br>
+            -> 변수 선언 시 저장되어 지는 값 (리터럴)에 의해 자동으로 자료형이 결정 됨.
+
+        </p>
+
+        <h3>자바스크립트의 자료형 종류</h3>
+        <ul>
+            <li>string(문자열)</li>
+            <li>number(숫자)</li>
+            <li>boolean(논리값)</li>
+            <li>object(객체)</li>
+            <li>function(함수)</li>
+            <li>undefined(정의되지 않은, 초기값이 없는 변수)</li>
+        </ul>
+
+        <button onclick="typeTest();" >자료형 테스트</button>
+        <br><br>
+        <div id="area1"></div>
+        <script>
+            function typeTest(){
+                var name = "홍길동" ; //string 
+                var age = 20; // number
+                var check = true; // boolean
+                
+                // 배열을 초기화 할때는 대괄호[] 사용 
+                var hobby = ["영화", "음악","낮잠"]; // object 
+
+                // 객체를 생성할 떄는 중괄호{} 사용
+                var user = {
+                            // K : V 
+                            name : "고길동", 
+                            age : 30,
+                            id : "user01"
+                         }; //object
+            // 자바 스크립트 객체 표기법
+            // JavaScript Object Nation --> JSON
+             
+            var testFn = function testFunction(num1, num2){
+                                    var sum = num1 + num2;
+                                    alert(sum);
+                                }; // function
+
+            var noValue; // undefined           
+            // undefined와 null의 차이점
+            // -undefined : 변수의 자료형이 정의되지 않은 상태
+                            // == 변수에 초기값이 없다
+            // -null : 변수가 참조하고 있는 값이 없다.
+                    // 의도적으로 변수가 참조하고 있는 값이 없는 상태를 알림.
+
+
+            var area1 = document.getElementById("area1");
+            
+            area1.innerHTML = ""; // area1에 작성되어 있던 기존내용 삭제
+
+            // typeof : 값 또는 변수의 자료형을 확인하는 연산자
+            area1.innerHTML += name + "의 자료형 : " + typeof name + "<br>";
+            area1.innerHTML += age + "의 자료형 : " + typeof age + "<br>";
+            area1.innerHTML += check + "의 자료형 : " + typeof check + "<br>";
+
+            area1.innerHTML += hobby + "의 자료형 : " + typeof hobby + "<br>";
+            area1.innerHTML += user + "의 자료형 : " + typeof user + "<br>";
+            console.log(user);
+            console.log("user 객체 : " + user.name + "," + user.age + "," + user.id);
+
+            area1.innerHTML += testFn + "의 자료형 : " + typeof testFn + "<br>";
+                testFn(10,20); // 변수명으로 호출하면 가능
+                
+            area1.innerHTML += noValue + "의 자료형 : " + typeof noValue + "<br>";
+        }
+        </script>
+    </body>
+</html>

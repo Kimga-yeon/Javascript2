@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>10.함수2</title>
+        <style>
+            .area{
+                border: 1px solid black;
+                height: 230px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>함수 2</h1>
+
+        <h3>함수의 매개변수로 함수 타입 전달</h3>
+        <p>
+            함수도 자료형 중 하나이기 때문에 매개변수로 전달할 수 있다. 
+        </p>
+
+        <h4>선언적 함수를 매개변수로 전달</h4>
+        <button onclick="callFunctionTenTimes(otherFunction);">함수 수행</button>
+        <script>
+            // otherfunction 함수를 10번 호출 
+            function callFunctionTenTimes(otherFunction){ 
+                // 매개변수로 함수의 이름만을 전달하면 
+                // 전달받은 함수 내부에 작성되는 모양이 된다 (내부 함수 모양)
+
+                for(var i = 10 ; i>0; i--){
+                    otherFunction(i);
+                }
+            }
+
+            function otherFunction(i){
+                if(i>5){alert(i+"번 더 클릭하세요.");}
+                else if(i>1){alert(i+"번만 더 클릭하세요!!!");}
+                else{alert("마지막 한번!");}
+            }
+        </script>
+
+
+        <hr>
+
+        <h4>익명 함수를 매개변수로 전달</h4>
+
+        <button id="test2">함수 수행</button>
+        <div id="area1" class="area"></div>
+        <script>
+              function callFunctionTenTimes2(otherFunction){ 
+                for(var i = 0 ; i<10; i++){
+                    otherFunction(i);
+                }
+            }
+            document.getElementById("test2").onclick = function(){
+                document.getElementById("area1").innerHTML = "";
+
+                callFunctionTenTimes2( // 함수 호출 
+
+                    // 매개변수로 익명함수 작성 
+                    function(i){
+                        document.getElementById("area1").innerHTML += 
+                        "익명함수" + (i+1) + "번 호출함<br>";   
+                    }
+                );
+            }
+            
+        </script>
+
+        <hr>
+        <h3>익명 함수를 리턴하는 함수 : 함수명()(); 형태로 호출</h3>
+        <input type="text" id="text1" name="text1" size="30"readonly>
+        <button onclick="returnFunction()()">함수 수행</button>
+        <!-- 첫 번째() : returnFunction() 호출 
+             두 번째() : returnFunction()에서 반환된 익명함수를 호출-->
+        <script>
+           function returnFunction(){
+
+               return function(){
+                   document.getElementById("text1").value = "익명함수를 리턴 받아 수행함.";
+               }
+
+           }
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>03. HTML 태그 접근</title>
+        <style>
+            .area{
+                width : 300px;
+                height: 100px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTML 태그에 접근하기</h1>
+
+        <h3>아이디로 접근하기</h3>
+        <div id="area1" class="area"></div>
+        <button onclick="accessId();">아이디로 접근</button>
+
+        <script type="text/javascript">
+            function accessId(){
+                
+                // 아이디 값이 "area1"인 요소를 얻어와 area1 변수에 저장
+                var area1 = document.getElementById("area1");
+
+                area1.innerHTML = "<h3> 아이디로 접근 성공 </h3>";
+            
+                // area1 요소에 배경색을 "yellow"로 변경 
+                area1.style.backgroundColor = "yellow";
+            }
+        </script>
+
+        <br><br>
+        <div id="area2" class="area">  </div>
+        <button onclick="accessId2();">클릭 시 마다 색 변경</button>    
+        <script>
+            function accessId2(){
+                var area2 = document.getElementById("area2");
+
+                // area2 요소의 배경색을 얻어와 bgColor변수에 저장
+                var bgColor = area2.style.backgroundColor;
+
+                if(bgColor == "red"){
+                    area2.style.backgroundColor = "yellow";
+                }else{
+                    area2.style.backgroundColor = "red";
+                }
+            }
+        </script>
+
+        <hr>
+
+        <h3>클래스명으로 접근하기</h3>
+        <div class="area test-div"></div>
+        <div class="area test-div"></div>
+        <button onclick="classTest();">클래스 테스트</button>
+
+        <script>
+            function classTest(){
+            // 문서 내에서 클래스명이 "test-div" 인 요소를 
+            // 모두 얻어와 배열 형태로 저장함
+            // 이를 arr변수에 저장
+            var arr = document.getElementsByClassName("test-div");
+            
+            arr[0].style.backgroundColor = "red";
+            arr[1].style.backgroundColor = "blue";
+        }
+        </script>
+
+        <hr>
+        <h3>태그명으로 접근하기</h3>
+        <ul>
+            <li>목록1</li>
+            <li>목록2</li>
+            <li>목록3</li>
+            <li>목록4</li>
+            <li>목록5</li>
+        </ul>
+        <button onclick="accessTagName();">태그명으로 접근</button>
+        <script>
+            function accessTagName(){
+                // 문서 내 모든 li태그를 얻어와 배열 형식으로 저장한 후
+                // tArr에 저장
+                var tArr = document.getElementsByTagName("li");
+            
+                console.log("전달받은 li태그의 개수 : " + tArr.length);
+            
+                var changeColor = 50;
+
+                for(var i=0; i<tArr.length; i++){
+                    tArr[i].style.backgroundColor = "rgb(130,220,"+changeColor + ")";
+                    changeColor +=50;
+                }
+            }
+        </script>
+        <hr>
+
+        <h3>name 속성명으로 접근</h3>
+        <form method="get" action="#">
+            <fieldset>
+                <legend>취미</legend>
+                <table>
+                    <tr>
+                        <td><input type="checkbox" name="hobby" value="game" id="game"><label for="game">게임</label></td>
+                        <td><input type="checkbox" name="hobby" value="music" id="music"><label for="music">음악감상</label></td>
+                        <td><input type="checkbox" name="hobby" value="movie" id="movie"><label for="movie">영화보기</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="hobby" value="book" id="book"><label for="book">독서</label></td>
+                        <td><input type="checkbox" name="hobby" value="travle" id="travle"><label for="travle">여행</label></td>
+                        <td><input type="checkbox" name="hobby" value="exercise" id="exercise"><label for="exercise">운동</label></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+
+        <div id="area3" class="area"></div>
+        <button onclick="accessName();">name으로 접근</button>
+        <script type="text/javascript">
+            function accessName(){
+                var hobbys = document.getElementsByName("hobby");
+                console.log("hobbys의 길이 : " + hobbys.length);
+                // 같은 name 속성을 가진 요소의 개수가 출력됨.
+    
+                var checkItems = "";
+    
+                var count =0; // check 개수 카운트용 변수
+    
+                //  for in 문(자바의 향상된 for문과 비슷한 모양)
+                for(var i in hobbys){
+                    // 배열 또는 객체의 인덱스 0부터 길이까지 1씩 증가하며 반복
+                
+                    if(hobbys[i].checked){
+                        // -> hobbys 배열의 i번째 인덱스 요소가 
+                        // check가 되어 있으면 true, 없으면 false가 반환됨.
+    
+                        checkItems += "[" + hobbys[i].value + "]"
+                        // -> hobbys 배열의 i번째 인덱스 요소의
+                        // value 값을 checkItems 문자열에 누적
+    
+                        count++; //체크 카운트 개수 1 증가
+                    }
+                } // for in문 end
+    
+                document.getElementById("area3").innerHTML = checkItems;
+                document.getElementById("area3").innerHTML 
+                                               += "<br>checked된 개수 : " +count;
+    
+            }
+        </script>
+
+        <hr>
+        <h3>text box(input box,입력 상자)에서 value읽어 오기</h3>
+        <lable for ="userName">이름 : </lable>
+        <input type="text" name="userName" id="userName">
+        <button onclick="readValue();">입력값 확인</button>
+        <div id="area4" class="area" ></div>
+
+        <script>
+            function readValue(){
+                var input = document.getElementById("userName");
+
+                // 만약 input 태그에 입력된 값(value)이 빈 문자열이거나 
+                // 길이가 0인 경우 --> 입력이 안된 경우 
+                if(input.value == "" || input.value.length == 0){
+                    alert("이름을 입력하세요.");
+
+                    // input 태그에 커서 깜빡이게 하기
+                    input.focus();
+                }else{
+                    document.getElementById("area4").innerHTML
+                    = "<h4>" + input.value + "님 환영합니다.<h4>";
+                }
+            }
+        </script>
+
+        <hr>
+
+        <h3>입력한 색으로 div 배경색 변경하기</h3>
+        <label for="inputColor">색 입력 : </label>
+        <input type="text" id="inputColor" name="inputColor">
+        <button onclick="changeColor();">색 변경</button>
+        <div id="area5" class="area"></div>
+
+        <script type="text/javascript">
+        function changeColor(){
+            // id가 inputColor인 요소를 얻어와 inputColor 변수에 저장
+            var inputColor = document.getElementById("inputColor");
+            
+            // inputColor 요소의 작성된 값 (Value)을 얻어와 color변수에 저장
+            var color = inputColor.value;
+
+                // 입력된 값이 없다면 
+                if(color == "" || color.length == 0){
+                    alert("색을 입력해주세요.");
+                    inputColor.focus();
+                   //inputColor 요소로 초점 이동
+
+                }else{ // 입력된 값이 있다면
+                    // id가 "area5" 인 요소를 얻어와 area5 변수에 저장
+                    var area5 = document.getElementById("area5");
+
+                    // area5 요소의 배경색을 입력받은 color 로 변경
+                    area5.style.backgroundColor = color;
+                }
+        }
+        </script>
+    </body>
+</html>

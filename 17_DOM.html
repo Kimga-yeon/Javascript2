@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>17. DOM</title>
+        <style>
+            .area{
+                height: 150px;
+                border: 1px solid black;
+                background-color: skyblue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>DOM(Document Object Model)</h1>
+        <p>
+            HTML에 있는 태그들을 구조화(트리) 하였을 때 <br>
+            각각의 태그를 노드(node)라고 한다.
+        </p>
+        <h3>텍스트 노드가 있는 노드 생성</h3>
+        <button onclick="test1();">실행</button>
+        <div id="area1" class="area"></div>
+        <script>
+            function test1(){
+                
+                // 요소(element) 생성
+                var title = document.createElement("h3");
+                //<h3></h3> 태그를 생성해서 title변수에 저장 
+
+                // textNode생성 (태그의 내용 담당)
+                var textNode = document.createTextNode("점심먹으로 갑시다.");
+                // p, div , h1~6, pre태그 등의 내용을 의미 
+
+                // 노드 연결
+                title.appendChild(textNode);
+                // <h3>태그 내부에 "점심 먹으러 갑시다"라는 텍스트를 연결(작성)
+                // -> <h3>점심먹으러 갑시다.</h3>
+
+                //area1에 출력 
+                document.getElementById("area1").appendChild(title);
+            }
+        </script>
+
+        <hr>
+
+        <h3>텍스트노드가 없는 노드 생성</h3>
+        <button onclick="test2();">실행</button>
+        <div id="area2" class="area"></div>
+        <script value="">
+            function test2(){
+                // img 태그 요소 생성 
+                var imgEl = document.createElement("img");
+
+                // 속성 지정 
+                imgEl.src = "8282.gif";
+                imgEl.width = "200";
+                imgEl.height = "150";
+
+                // 없는 속성 추가하기
+                imgEl.setAttribute("myProperty", "123");
+
+                document.getElementById("area2").appendChild(imgEl); 
+            }
+        </script>
+
+        <hr>
+
+        <h3>노드 삭제</h3>
+        <button onclick="test3()">이미지 삭제</button>
+        <script>
+            function test3(){
+                document.getElementById("area2").lastChild.remove();
+            }
+        </script>
+       
+       <hr>
+
+        <h3>스타일 지정</h3>
+        <button onclick="test4()">스타일 변신</button>
+        <div id="area4" class="area"></div>
+        <script>
+            function test4(){
+            var area4 = document.getElementById("area4");
+
+            area4.style.backgroundColor = "hotpink";
+            area4.style.borderRadius = "20px";
+            area4.style.width = "200px";
+            area4.style.height = "200px";
+            area4.style.transitionDuration = "1s";
+            }
+        </script>
+
+    </body>
+</html>

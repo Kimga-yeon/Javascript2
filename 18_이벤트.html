@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>18.이벤트(Event)</title>
+        <style>
+            .area{
+                height: 100px;
+                border: 1px solid black;
+                background-color: skyblue;
+            }
+
+            pre{
+                border: 1px dashed black;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>이벤트</h1>
+
+        <h3>고전 이벤트 모델</h3>
+        <pre>
+            요소 객체가 갖고 있는 이벤트 속성에 이벤트 핸들러를 연결하는 방법으로
+            이벤트 객체를 제거 하고자 할 때 이벤트 속성에 null을 대입하면 됨.
+        </pre>
+        <button id="test1">test1()실행 확인</button>
+        <button id="test2">test1()실행 확인</button>
+        <div id="area1" class="area"></div>
+        <script>
+            var area1 = document.getElementById("area1");
+            var test1 = document.getElementById("test1");
+            var test2 = document.getElementById("test2");
+
+            test1.onclick = function(){
+            // 이벤트 속성 (연결) 이벤트 핸들러 
+                area1.innerHTML += "test1()이 실행됨<br>";
+            }
+
+            test1.onclick = function(){
+            // 이벤트 속성 (연결) 이벤트 핸들러 
+               console.log("!!!!!!!!!!!!!!!!!!!");
+            }
+
+            // 고전이벤트 모델은 이벤트 속성에 다른 이벤트 핸들러를 연결할 경우 
+            // 마지막 것만 실행됨.
+
+            // test1의 이벤트 핸들러 삭제 시키기 
+            test2.onclick = function(){
+                area1.innerHTML = "test2() 호출 시 test1() 이벤트 핸들러가 제거됨."
+                test1.onclick = null; //이벤트 핸들러 제거
+            }
+
+        </script>
+
+        <hr>
+        <h3>이벤트 발생 객체</h3>
+        <pre>
+            이벤트 발생 객체는 이벤트 핸들러의 매개변수(e 또는 window.event)의 형태로
+            이벤트 정보를 전달한다.
+            
+            이벤트 핸들러 내부에서 e.target또는 this 키워드를 이용하여
+            이벤트가 발생된 요소를 선택할 수 있다. 
+        </pre>
+        <button id="test3">test3 실행 확인 </button>
+        <script>
+            var test3 = document.getElementById("test3");
+
+            test3.onclick = function(e){
+                // e : 발생한 이벤트에 대한 정보가 담긴 객체 
+                // window.event : IE8 이전 버전의 e 객체 
+
+                var event = e || window.event;
+
+               console.log(event);
+
+                // 이벤트가 발생한 객체(요소)
+               console.log(event.target);
+               console.log(this);
+
+               if(this.style.backgroundcolor=="red"){
+                this.style.backgroundColor = "yellow";
+               }else{
+                   this.style.backgroundColor = "red";
+               }
+            }
+
+        </script>
+        <hr>
+        <h3>인라인 이벤트 모델</h3>
+        <pre>
+            요소 내부에 이벤트를 작성하는 방식으로 
+            script 태그에 정의된 함수를 호출함.
+        </pre>
+        <button onclick="test4()">실행</button>
+        <div id="area4" class="area"></div>
+        <script>
+            function test4(){
+                alert("test4() 실행됨.");
+            }
+        </script>
+
+        <hr>
+
+        <h3>기본 이벤트 제거</h3>
+        <pre>
+            태그에 기본적으로 설정되어 있는 이벤트를 제거 하는 것
+            -> 이벤트 핸들러(==함수)의 return 값을 false로 반환하면 
+              기본 이벤트가 수행되지 않음. 
+
+              기본 이벤트 예시 
+              - a태그: 페이지 이동 
+              - form 태그 내부에 submit 버튼 : 입력 양식 제출 후 페이지 갱신
+
+        </pre>
+
+        <form id="test4Fonrm">
+            <label for="userId"> ID : </label>
+            <input type="test" name="userId" id="userId"><br>
+
+            <label for="userPw"> PWD : </label>
+            <input type="password" name="userPw" id="userPw"><br>
+
+            <button onclick="return test5();">로그인</button>
+        </form>
+
+        <script>
+            function test5(){
+                var userId = document.getElementById("userId");
+                var userPw = document.getElementById("userPw");
+
+                var check = true;
+
+                // 아이디 입력 X 일 때 
+                if(userId.value.length == 0 || userId.value.trim() == ""){
+                   alert("아이디를 입력해주세요");
+                   userId.focus();
+                    check = false;
+                }else if(userPw.value.length == 0 || userPw.value.trim() == ""){
+                    alert("비밀번호를 입력해주세요");
+                   userPw.focus();
+                    check = false;
+                }
+                return check;
+            }
+        </script>
+        <hr>
+        <h3>표준 이벤트 모델(addEventListner)</h3>
+        <pre>
+            W3에서 공식적으로 지정한 이벤트 모델 
+            한 번에 여러 개의 이벤트 핸들러를 설정할 수 있다. 
+            IE는 9버전 부터 지원.
+            
+            <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">
+                (참고) HTML DOM 이벤트 종류 </a>
+            
+        </pre>
+
+        <button id="btn">표준 이벤트 모델</button>
+        <script>
+            var btn = document.getElementById("btn");
+
+            // btn 요소에 이벤트에 대한 동작을 추가함 
+            btn.addEventListener("click", function(){
+                               // 이벤트, 이벤트 핸들러
+                alert("표준 이벤트 모델 테스트");
+            });
+
+            btn.addEventListener("click", function(){
+                console.log("표준 이벤트 모델 테스트");
+            });
+              
+            btn.addEventListener("mouseenter", function(){
+               btn.style.backgroundColor = "yellow";
+            });  
+
+            btn.addEventListener("mouseleave", function(){
+               btn.style.backgroundColor = "gray";
+            });  
+            
+        </script>
+
+    </body>
+</html>

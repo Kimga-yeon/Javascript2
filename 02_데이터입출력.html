@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>02.데이터 입출력</title>
+    </head>
+    <body>
+        <h1>데이터 입출력</h1>
+
+        <h2>데이터 출력</h2>
+        <script type="text/javascript">
+            // script 태그의 내용이 funcrion으로 감싸져 있지 않으면
+            // html 화면 로딩 과정에서 수행됨. (키자마자 나옴)
+            window.alert("출력 문구를 실행 하였습니다.");
+
+            document.write("document.write()로 출력한 내용");
+        </script>
+
+        <hr>
+
+        <button type="button" onclick="writeFn();" >출력</button>
+        <script>
+            function writeFn(){
+                document.write("HTML문서가 완전히 로딩된 후"
+                            + "doncument.write 호출 시"
+                            + "기존에 화면에 작성되어 있던 HTML코드가 모두 삭제됨.");
+            }
+        </script>
+
+        <hr>
+
+        <h3>innerHTML을 이용하여 요소의 내용 변경하기</h3>
+        <div id="area1">
+            자바 스크립트에서 태그 요소의 값을 읽거나, 변경할 때 
+            innerHTML 속성을 사용함.
+    </div>
+    <button onclick="checkValue()">innerHTML 확인하기</button>
+    <script>
+        function checkValue(){
+            // 아이디 속성값을 이용하여 요소 선택 후 값 읽어와 경고창으로 출력하기.
+      
+            // 아이디 속성값을 이용하여 해당 요소를 얻어와 변수에 저장
+            var divEl = document.getElementById("area1");
+
+            // 읽어온 값을 경고창을 이용해 출력
+            alert(divEl.innerHTML);
+            console.log(divEl.innerHTML);
+
+            // 선택한 요소의 값을 변경
+            divEl.innerHTML = "innerHTML 속성을 이용하여 값 변경";
+
+        }
+    </script>
+    <hr>
+
+    <h3>console.log()를 이용하여 개발자 도구 console화면에 출력하기</h3>
+    <p>
+        개발자 도구 콘솔화면에 내용을 출력하고자 할 때 사용하며, 
+        주로 디버깅 시 사용됨.
+    </p>
+    <button onclick="printConsole();">콘솔창에 내용 출력</button>
+    <script>
+        function printConsole(){
+            console.log("콘솔 화면에 내용 출력");
+        }
+    </script>
+    <hr><hr>
+
+    <h2>데이터 입력</h2>
+
+    <h3>window.confirm()을 이용한 데이터 입력</h3>
+    <p>
+        어떤 질문에 대한 "예 또는 아니오"의 결과를 얻을 때 사용함.<br>
+        브라우저에 경고창이 나타나면서 확인/취소 버튼이 같이 나타남.<br>
+        확인 버튼 클릭 시 true, 취소 버튼 클릭 시 false가 반환됨.
+
+    </p>
+
+    <div id="area2"></div>
+    <button onclick="checkStatus()">상태 확인 버튼</button>
+    <script>
+        function checkStatus(){
+            var result = window.confirm("지금 졸리면 확인, 아니면 취소 버튼을 누르세요.");
+
+            // console에서 리턴된 값 확인
+            console.log("리턴 된 값 : " + result)
+
+            // 문자열을 저장할 변수 선언.
+            var str = "";
+            if(result){
+                str = "너무 졸려요ㅜㅜ";
+            }else{
+                str = "왜졸리죠?";
+            }
+
+            // 내용을 작성하려는 id가 "area2"인 요소 얻어오기
+            var area2 = document.getElementById("area2");
+
+            // 얻어온 요소에 내용 출력 
+            //area2.innerHTML = "<h1>" + str + "</h1>";
+            // innerHTML을 이용하여 내용 출력 시
+            // 출력되는 문자열에 작성된 HTML 태그가 실제 태그로 적용됨. 
+
+            // area2.innerText = "<h1>" + str + "</h1>";
+            // innerText를 이용하여 내용 출력 시 
+            // 출력되는 문자열에 작성 된 HTML 태그는 그냥 문자로 인식이됨.
+        
+            // 복합 대입 연산자를 사용하면 이전 내용에서 이어 쓰기가 됨.
+            area2.innerHTML += "<h1>" + str + "</h1>"
+        }
+       
+    </script> 
+    <hr>
+    <h3>window.prompt()를 이용한 데이터 입력</h3>
+    <p>
+        텍스트필드와 확인/취소 버튼이 있는 대화 상자를 출력하고
+        입력한 메세지를 리턴함.
+    </p>
+    <button onclick="testPrompt();">이름 입력</button>
+    <div id="area3"></div>
+    <script>
+        function testPrompt(){
+            var result = window.prompt("당신의 이름을 입력해주세요.");
+
+            document.getElementById("area3").innerHTML = result+"님 환영합니다.";
+        }
+
+    </script>
+    </body>
+</html>

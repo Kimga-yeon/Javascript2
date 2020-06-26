@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>15. 내장 객체 2</title>
+        <style>
+            .area{
+                width: 300px;
+                height: 100px;
+                border: 1px solid black;
+                font-size: 50px;
+                font-weight: bold;
+            }
+
+            .area_long{
+                width: 100px;
+                height: 300px;
+                border: 1px solid black;
+                overflow: scroll; 
+                /* 내부 content가 테두리를 넘어가면 스크롤을 생성 */
+            }
+        </style>
+    </head>
+    <body>
+        <h1>자바스크립트 내장 객체2</h1>
+
+        <p> 
+            window객체는 자바스크립트 최상위 객체이며 BOM,DOM으로 나뉘어짐<br>
+            BOM(Browser Object Model): location, navigator, screen<br>
+            DOM(Document Object Model) : document
+        
+        </p>
+        <h3>window 객체</h3>
+        <p>브라우저 창에 대한 설정을 하는 객체</p>
+        <button onclick="test1()">네이버</button>
+        <button onclick="test2()">구글</button>
+
+        <script>
+            function test1(){
+               // window.open();
+
+               // window.open('주소', 'open 방식 또는 새창의 이름', '형태'); 
+               /*
+               var ret = window.open(url, name, specs, replace);
+   
+            1.1. 반환값(ret)
+            새로 만들어진 창 객체가 반환됩니다. 창의 생성에 실패하면 null을 반환합니다. 이 객체를 통해서 새창을 제어할 수 있습니다. 예로 ret.close(); 로 창을 닫을 수 있습니다.
+   
+            1.2. url
+            새창에 보여질 주소 입니다. 선택적인 값으로 비워두면 빈창(about:blank)이 보입니다.
+   
+            1.3. name
+            새로 열릴 참의 속성 또는 창의 이름을 지정합니다. 선택적인 값으로 기본값은 "_blank" 입니다. 사용 가능한 값을 다음과 같습니다.
+            - _blank : 새 창에 열립니다. 이것이 기본값입니다.
+            - _parent : 부모 프레임에 열립니다.
+            - _self : 현재 페이지를 대체합니다.
+            - _top : 로드된 프레임셋을 대체합니다.
+            - name(임의의 이름) : 새 창이 열리고 창의 이름을 지정합니다. 동일한 이름에 다시 open() 을 하면 기존의 열린창의 내용이 바뀝니다. 다른 이름을 사용하면 또다른 새창이 열립니다.
+   
+            1.4 specs
+            선택적인 값으로 창의 크기, 스크롤여부, 리사이즈 가능등의 속성을 지정합니다. 사용가능한 값을 다음과 같습니다.
+   
+            - channelmode=yes|no|1|0 : 전체화면으로 창이 열립니다. IE에서만 동작합니다.
+            - directories=yes|no|1|0 : (사용되지 않습니다.) 디렉토리 버튼의 표시여부
+            - fullscreen=yes|no|1|0 : 전체 화면 모드. IE에서만 동작합니다.
+            - height=pixels : 창의 높이를 지정합니다.(height=600)
+            - width=pixels : 창의 너비를 지정합니다.(width=500)
+            - left=pixels : 창의 화면 왼쪽에서의 위치를 지정합니다. 음수는 사용할 수 없습니다.
+            - top=pixels : 창의 화면 위쪽에서의 위치를 지정합니다. 음수는 사용할 수 없습니다.
+            - location=yes|no|1|0 : 주소 표시줄 사용여부를 지정합니다. Opera에서만 동작합니다.
+            - menubar=yes|no|1|0 : 메뉴바 사용여부를 지정합니다.
+            - resizable=yes|no|1|0 : 창의 리사이즈 가능 여부를 지정합니다. IE에서만 동작합니다.
+            - scrollbars=yes|no|1|0 : 스크롤바 사용여부를 지정합니다. IE, Firefox, Opera에서 동작합니다.
+            - status=yes|no|1|0 : 상태바를 보여줄지 지정합니다.
+            - titlebar=yes|no|1|0 : 타이틀바를 보여줄지 지정합니다. 호출 응용 프로그램이 HTML 응용 프로그램이거나 신뢰할 수있는 대화 상자가 아니면 무시됩니다.
+            - toolbar=yes|no|1|0 : 툴바를 보여줄지 지정합니다. IE, Firefox에서 동작합니다.
+   
+            1.5 replace
+            히스토리 목록에 새 항목을 만들지 현재 항목을 대체할지 지정합니다.
+   
+            - true : 현재 히스토리를 대체합니다.
+            - false : 히스토리에 새 항목을 만듭니다.
+   
+   
+            출처: https://offbyone.tistory.com/312 [쉬고 싶은 개발자]
+            */
+
+            window.open("https://naver.com","_blank",false);
+            }
+
+            function test2(){
+                window.open("https://google.com","_blank", "width:600, height:500",false);
+            }
+
+            
+        </script>
+
+        <hr>
+
+        <h3>window객체의 timer 관련 메소드</h3>
+        <h4>setTimeout()</h4>
+        <p>일정 시간 후 특정 내용을 한 번만 실행</p>
+        <button onclick="test3()">3초 후 실행</button>
+        <script>
+            function test3(){
+                var newWindow = window.open();
+
+                newWindow.alert("확인 버튼을 클릭하면 3초 후 창이 닫힙니다.")
+
+                // window.setTimeout( 수행할 기능(function) , 딜레이 시간(ms));
+                window.setTimeout(function(){
+                    newWindow.close(); //창 닫기
+                }, 3000);
+
+            }
+        </script>
+
+        <h4>setInterval()</h4>
+        <p> 특정 내용을 일정 주기로 반복하여 실행</p>
+        <button onclick="test4()">실행</button>
+        <div id="area1" class="area"></div>
+        <script>
+            function test4(){
+                var area1 = document.getElementById("area1");
+
+                // window.setInterval(수행할 기능(function), 반복 주기(ms));
+                window.setInterval(function(){
+                    var date = new Date(); // 현재 시간 
+
+                    area1.innerHTML
+                     = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                }, 1000);
+
+            }
+
+        </script>
+            <h4>clearInterval</h4>
+            <button onclick="startFn()">시작</button>
+            <button onclick="stopFn()">STOP</button>
+            <button onclick="recordFn()">기록</button>
+
+            <div id="area2" class="area"></div>
+            <div id="area2-2" class="area_long"></div>
+
+            <script>
+                var stop = false; // stop버튼이 눌렸는지 확인하는 변수
+                var timer; // setInterval()에 대한 정보를 저장하는 변수
+
+                function startFn(){
+                    document.getElementById("area2-2").innerHTML = "";
+                    stop = false;
+                    var area2 = document.getElementById("area2")
+                    var count = 0;
+                    if(!stop){
+                        timer = window.setInterval(function(){
+                            area2.innerHTML
+                                = parseInt(count / 100 / 60 % 60)+ ":" //분
+                                + parseInt(count / 100 % 60) + ":"     //초
+                                + (count % 100);                  // ms 2자리
+
+                             count++;
+                        }, 10)
+                    }
+                }
+
+                function stopFn(){
+                    
+                    //  timer에 저장된 setInterval()을 지워버림
+                    window.clearInterval(timer);
+                    stop = true;
+                }
+
+                function recordFn(){
+                    // 기록 영역에 스탑워치 영역의 내용을 추가 
+                    document.getElementById("area2-2").innerHTML
+                        += document.getElementById("area2").innerHTML + "<br>";
+                }
+
+            </script>
+
+            <hr>
+
+            <h3>screen 객체</h3>
+            <p> 웹 브라우저 화면이 아닌, 운영체제 화면의 속성을 가지는 객체 이다.</p>
+            <button onclick="test5()">실행</button>
+            <script>
+                function test5(){
+                    console.log("화면의 높이(px) : " + screen.height);
+                    console.log("화면의 너비(px) : " + screen.width);
+                    console.log("실제 화면에서 사용 가능한 높이(px) : " + screen.availHeight);
+                    console.log("실제 화면에서 사용 가능한 너비(px) : " + screen.availWidth);
+                    console.log("사용 가능한 색상 수 : " + screen.colorDepth);
+                    console.log("한 픽셀당 비트 수 : " + screen.pixelDepth);
+                }
+            </script>
+            <hr>
+            <h3>location 객체</h3>
+            <p>브라우저에서 주소 표시줄과 관련된 객체</p>
+            <button onclick="location='https://naver.com'">네이버로 이동</button>
+            <button onclick="location.href='https://naver.com'">네이버로 이동</button>
+            <br>
+            <button onclick="location=location" >새로고침(갱신)</button>
+            <button onclick="location.href=location.href" >새로고침(갱신)</button>
+            <button onclick="location.reload()">현재 화면 위치에서 새로고침</button>
+            <br>
+            <button onclick="location.href = 'https://google.com'">구글로 이동</button>
+            <button onclick="location.assign('https://google.com')">구글로 이동</button>
+            <button onclick="location.replace('https://google.com')">구글로 이동</button>
+            <!-- replace는 현재화면 자체를 바꾸기 때문에 뒤로가기가 불가능 -->
+
+            <hr>
+            <h3>navigator 객체</h3>
+            <p>웹 페이지를 실행하고 있는 브라우저에 대한 정보를 가지고 있는 객체</p>
+            <button onclick="test6()">실행</button>
+            <script>
+                function test6(){
+                    console.log("브라우저 코드명 : " + navigator.appCodeName);
+                    console.log("브라우저 이름 : " + navigator.appName);
+                    console.log("브라우저 전체 정보 : " + navigator.userAgent);
+                    console.log("브라우저 언어 : " + navigator.language);
+                    console.log("브라우저 운영체제 : " + navigator.platform);
+                }
+            </script>
+    </body>
+</html>

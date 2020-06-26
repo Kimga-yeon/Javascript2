@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>07.연산자</title>
+        <style>
+            .area{
+                border : 1px solid black;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>연산자</h1>
+        <h3>== , != (동등 비교 연산자)</h3>
+        <p>
+            자료형에 관계 없이 값이 일치하면 true, 아니면 false
+        </p>
+        <button onclick="opTest1()">확인하기</button>
+        <div id="area1" class="area"></div>
+
+        <script>
+            var num = 1; // 숫자1
+            var strNum = "1"; // 문자열1
+
+            var boolTrue = true; // 논리형 true
+            var strTrue = "true"; // 문자열 true
+
+            var num0 = 0;  // 숫자 0
+            var str0 = "0"; // 문자열 0
+            var str = ""; // 빈 문자열
+            
+            var nullVal = null;  
+            var unDef = undefined;
+            
+            function opTest1(){
+                var area1 = document.getElementById("area1");
+
+                area1.innerHTML = "";
+            
+                // 동등 비교
+                area1.innerHTML += 'num == 1 : '+ (num == 1) + '<br>';
+                area1.innerHTML += 'num(1) == strNum("1") : '+ (num == strNum) + '<br>';
+                area1.innerHTML += 'num(1) == boolTrue(true) : '+ (num == boolTrue) + '<br>';
+                area1.innerHTML += 'num(1) == strTrue("true") : '+ (num == strTrue) + '<br>';
+
+                area1.innerHTML += 'num0 == 0 : '+ (num0 == 0) + '<br>';
+                area1.innerHTML += 'num0(0) == str0("0") : '+ (num0 == str0) + '<br>';
+                area1.innerHTML += 'num0(0) == str("") : '+ (num0 == str) + '<br>';
+                area1.innerHTML += 'str0("0") == str("") : '+ (str0 == str) + '<br>';
+                
+                area1.innerHTML += 'nullVal(null) == unDef(undefined) : '+ (nullVal == unDef) + '<br>';
+
+
+            }
+
+
+            
+        </script>
+
+   
+    <h3>=== , !== (동일 비교 연산자)</h3>
+    <p>
+        자료형과 값이 일치하면 true, 아니면 false
+    </p>
+    <button onclick="opTest2()">확인하기</button>
+    <div id="area2" class="area"></div>
+
+    <script>
+    
+        
+        function opTest2(){
+            var area2 = document.getElementById("area2");
+
+            area2.innerHTML = "";
+        
+            // 동등 비교
+            area2.innerHTML += 'num === 1 : '+ (num === 1) + '<br>';
+            area2.innerHTML += 'num(1) === strNum("1") : '+ (num === strNum) + '<br>';
+            area2.innerHTML += 'num(1) === boolTrue(true) : '+ (num === boolTrue) + '<br>';
+            area2.innerHTML += 'num(1) === strTrue("true") : '+ (num === strTrue) + '<br>';
+
+            area2.innerHTML += 'num0 === 0 : '+ (num0 === 0) + '<br>';
+            area2.innerHTML += 'num0(0) === str0("0") : '+ (num0 === str0) + '<br>';
+            area2.innerHTML += 'num0(0) === str("") : '+ (num0 === str) + '<br>';
+            area2.innerHTML += 'str0("0") === str("") : '+ (str0 === str) + '<br>';
+            
+            area2.innerHTML += 'nullVal(null) === unDef(undefined) : '+ (nullVal === unDef) + '<br>';
+
+
+        }
+
+        </script>
+
+        <hr>
+        <h3>연산자를 이용한 짧은 조건문</h3>
+        <button onclick="checkLogic();">실행</button>
+
+        <script>
+            function checkLogic(){
+                var input = prompt("숫자를 입력하세요.");
+
+                // console.log(input / 2);
+
+                // 짧은 조건문 연산자 : || -> 거짓이면 실행
+                // || -> 거짓 이면 실행
+                // && -> 참 이면 실행  
+                input %3 == 0 || alert("3의 배수가 아닙니다.")
+                input %3 == 0 && alert("3의 배수 입니다.")
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>08.배열</title>
+        <style>
+            .area{
+                border: 1px solid black;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>배열</h1>
+
+        <h3>자바스크립트의 배열이란?</h3>
+        <p>
+            자바스크립트에서는 별도의 자료형 지정이 없기 때문에 <br>
+            변수가 나열되어있는 배열도 자료형 관계없이 모든 값을 담을 수 있음.<br>
+        --> 자바의 컬렉션과 비슷 <br>
+        + 자바스크립트 배열은 별도의 크기 지정이 없고, 크기가 알아서 증가하는 특징이 있음.
+        
+        </p>
+
+        <button onclick="arrayTest1()">확인하기</button>
+        <div id="area1" class="area"></div>
+        <script>
+            function arrayTest1() {
+            // 배열 선언 : 크기를 지정 가능 또는 안해도 됨.
+
+            var area1 = document.getElementById("area1");
+
+            area1.innerHTML = "";
+
+            // 리터럴을 이용한 배열 선언 및 초기화
+            var arr1 = ['홍길동', 20, true, [1, 2, 3, 4]];
+
+            for (var i in arr1) {
+                area1.innerHTML += arr1[i] + " ";
+            }
+            area1.innerHTML += "<br>";
+
+
+            // Array() 배열 생성자 함수 
+            var arr2 = new Array();
+            console.log(arr2);
+
+            arr2[0] = "바나나";
+            arr2[1] = "딸기";
+            arr2[2] = "사과";
+            arr2[3] = "자몽";
+
+            for (var i in arr2) {
+                area1.innerHTML += arr2[i] + " ";
+            }
+            area1.innerHTML += "<br>";
+
+            // Array() 생성자 함수를 이용하여 크기까지 지정하여 생성
+            var arr3 = new Array(3);
+            console.log(arr3);
+
+            arr3[0] = "바나나";
+            arr3[1] = "딸기";
+            arr3[2] = "사과";
+            arr3[3] = "자몽";
+
+            for (var i in arr3) {
+                area1.innerHTML += arr3[i] + " ";
+            }
+            area1.innerHTML += "<br>";
+
+            //   Array() 생성자 함수를 이용하여 배열 생성과 동시에 초기화
+            var arr4 = new Array("바나나", "딸기", "사과", "자몽", "오렌지", "키위");
+
+            for (var i in arr4) {
+                area1.innerHTML += arr4[i] + " ";
+            }
+            area1.innerHTML += "<br>";
+
+            //  비어있는 배열을 생성하는 가장 간단한 방법
+            var arr5 = [];
+        }
+    </script>
+
+        <hr>
+        <h4>toString(), join() : 배열을 결합하여 문자열로 반환</h4>
+        <p>toString()은 배열을 문자열로 합칠 때 요소 사이에 ,(콤마)를 추가하여 합침 <br>
+           join()도 기본적으로 toString()과 같지만 매개변수로 구분자를 지정할 수 있음.
+        </p>
+        <button onclick="arrayTest2()">확인하기</button>
+        <div id="area2" class="area"></div>
+        <script>
+            function arrayTest2(){
+                var arr = ["사과","바나나","토마토","수박"];
+                var area2 = document.getElementById("area2");
+
+                area2.innerHTML = "arr : " + arr + "<br>" ;
+                area2.innerHTML += "arr.toString() : " + arr.toString + "<br>" ;
+                area2.innerHTML += "arr.toString()의 자료형 : " + arr.toString + "<br>" ;
+                area2.innerHTML += "arr.join('/') : " + arr.join("/") + "<br>" ;
+            }
+        </script>
+        <hr>
+        <h4>
+            sort() : 배열을 오름차순으로 정렬<br>
+            reverse() : 배열의 순서를 뒤집음 
+        </h4>
+        <button onclick="arrayTest3();">실행 확인</button>
+        <div id="area3" class="area" ></div>
+        <script>
+            function arrayTest3(){
+                var area3 = document.getElementById("area3");
+                var arr = new Array();
+
+                for(var i=0; i<10; i++){
+                    // 1~100사이 난수
+                    arr[i] = Math.floor(Math.random() * 100 + 1);
+                }
+
+                // 난수 발생 출력
+                area3.innerHTML = "arr의 값 : " + arr + "<br><br>";
+
+                // 오름차순 출력
+                // area3.innerHTML += "arr.sort() 후 값 : " + arr.sort() + "<br><br>";
+                // 문자열에 대한 정렬이 이루어 져서 숫자 정렬이 원하는 형태로 출력되지 않음
+
+                // sort()의 매개변수로 정렬 기준이 작성된 함수를 전달하면 
+                // 해당 정렬 기준에 맞게 배열이 정렬됨.
+                
+                var sortFn = function(a,b){
+                                return a-b;
+                                }
+                area3.innerHTML += "arr.sort() 후 값 : " + arr.sort(sortFn) + "<br><br>";
+                area3.innerHTML += "arr.sort() 후 원본 arr 값 : " + arr + "<br><br>";
+                // -> sort()는 원본의 데이터 순서 자체를 변경시킴 
+
+                // 내림차순 출력
+                area3.innerHTML += "arr.sort().reverse() 후 값 : " + arr.sort(sortFn).reverse() + "<br><br>";
+                area3.innerHTML += "arr.sort().reverse() 후 원본 arr 값 : " + arr + "<br><br>";
+                // -> reverse()도 원본의 데이터 순서 자체를 변경시킴.
+            
+            }
+        </script>
+
+            <hr>
+                push(): 배열의 제일 뒤에 요소 추가<br>
+                pop() : 배열의 제일 뒤에 요소를 꺼내옴.(배열 자체에서 요소가 삭제됨.)
+                <br><br>
+                shift(): 배열의 제일 앞에 요소 제거 ( pop()의 반대 동작 )<br>
+                unshift : 배열의 제일 앞에 요소 추가 (push()의 반대 동작)
+
+            <h4>
+            <button onclick="arrayTest4()">실행 확인</button>
+            <div id="area4" class="area"></div>
+            <script type="text/javascript">
+                function arrayTest4(){
+                    var area4 = document.getElementById("area4");
+
+                    var arr = ['사과','바나나','딸기'];
+
+                    area4.innerHTML = "arr 초기값 : " + arr + "<br>";
+
+                    arr.push("수박");
+                    area4.innerHTML += "push('수박') : " + arr + "<br>";
+
+                    arr.push("멜론");
+                    area4.innerHTML += "push('멜론') : " + arr + "<br>";
+
+
+                    area4.innerHTML += "arr에서 pop()한 값 : " + arr.pop() + "<br>";
+                    area4.innerHTML += "pop() 수행 후 arr 값 : " + arr + "<br>";
+
+                    area4.innerHTML += "arr에서 pop()한 값 : " + arr.pop() + "<br>";
+                    area4.innerHTML += "pop() 수행 후 arr 값 : " + arr + "<br>";
+                }
+            </script>
+
+            <hr>
+            <h4>
+                slice() : 배열의 특정 위치를 선택해서 잘라냄. <br>
+                splice() : 배열의 특정 위치의 요소를 잘라내고 새로운 요소를 추가
+            </h4>
+            <button onclick="arrayTest5()">실행 확인</button>
+            <div id="area5" class="area"></div>
+            <script>
+                function arrayTest5(){
+                    var area5 = document.getElementById("area5");
+
+                    var arr = ['java','oracle','html5','css3'];
+
+                    area5.innerHTML = "arr초기값 : " + arr + "<br>";
+
+                    // slice(시작인덱스, 종료인덱스)
+                    // 배열의 시작 인덱스 이상, 종료인덱스 미만까지 잘라내서 반환
+                    // slice()는 원본 배열에 영향을 끼치지 않음.
+                    area5.innerHTML += "arr.slice(1,3) : " + arr.slice(1,3) + "<br>";
+                    area5.innerHTML += "slice(1,3)후 arr 값 : " + arr + "<br>";
+                
+                    // splice([시작인덱스], 잘라낼 수, 추가 값);
+                    // 원본 배열에 영향을 미침.
+                    area5.innerHTML += "splice(2,1,'javascript') : " + arr.splice(2,1,'javascript') + "<br>";
+                    area5.innerHTML += "splice(2,1,'javascript') 후 arr 값 : " + arr + "<br>";
+                }
+            </script>
+    
+    </body>
+</html>

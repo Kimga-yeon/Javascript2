@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>연습문제1</title>
+        <style>
+             .area{
+                width: 250px;
+                height: 150px;
+                border: 1px solid black;
+                
+            }
+
+        </style>
+    </head>
+    <body>
+        <h3>연습문제 1</h3>
+        <lable for ="userName">구매자 : </lable>
+        <input type="text" name="userName" id="userName"><br><br>
+
+        <lable for ="product">상품명 : </lable>
+        <input type="text" name="product" id="product"><br><br>
+
+        <lable for ="price">가격 : </lable> 
+        <input type="text" name="price" id="price">만원<br><br>
+
+        <button onclick="input();">입력값 출력하기</button>
+        <br><br>
+
+        <div id="area1" class="area"></div>
+
+        <script>
+            function input(){
+                var area1 = document.getElementById("area1");
+                var name = document.getElementById("userName");
+                var product = document.getElementById("product");
+                var price = document.getElementById("price");
+
+              area1.innerHTML += "구입자 : " + name.value + "<br>";
+              area1.innerHTML += "상품명 : " + product.value + "<br>";
+              area1.innerHTML += "구매가격 : " + price.value + "<br>";
+              
+            }
+
+
+        </script>
+
+        
+
+
+    </body>
+</html>

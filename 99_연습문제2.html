@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>연습2</title>
+        <style>
+            .area{
+                width: 250px;
+                height: 150px;
+                border: 1px solid black;
+            }
+         
+
+        </style>
+    </head>
+    <body>
+        <fieldset>
+            <legend>납품정보</legend>
+            <ul>
+                <li>
+                    <label>상품명 :</label> 
+                    <input type="text" id="name" name="name"><br><br>
+                </li>
+                <li>
+                    <label>납품수량 :</label> 
+                    <input type="text" id="count" name="count" size="8"><br>
+                    (최소 수량 : 10, 최대 수량 : 100, 10개 단위)<br><br>
+
+                </li>
+                <li>
+                    <label></label>납품등급(1~5등급) <br>
+                    <input type="range" id="level" name="level" min="1" max="5" step="1" >
+                    <input type="text" id="levelOutput" name="levelOutpt" readonly size="3"><br><br>
+
+                </li>
+                <li>
+                    <label>기타사항</label>
+                    <input type="text" id="etc" name="etc"><br><br>
+                </li>
+            </ul>
+            
+
+        </fieldset>
+
+        <button onclick="example2()"> send message</button>
+        <div id="area1" class="area"></div>
+
+        <script>
+
+            function example2(){
+                document.getElementById("level").oninput=function(){
+                document.getElementById("levelOutput").value = this.value+"등급";
+            }
+                var area1 = document.getElementById("area1");
+                var name = document.getElementById("name");
+                var count = document.getElementById("count");
+                var level = document.getElementById("level");
+                var etc = document.getElementById("etc");
+
+                area1.innerHTML = "상품명 : " + name.value + "<br>";
+                area1.innerHTML += "납품수량 : " + count.value + "<br>";
+                area1.innerHTML += "납품등급 : " + level.value + "<br>";
+                area1.innerHTML += "기타사항 : " + etc.value + "<br>";
+            }
+        </script>
+
+    </body>
+</html>

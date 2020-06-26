@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>13. 객체 2</title>
+        <style>
+            .area{
+                height: 250px;
+                border: 1px solid black;
+                background-color: skyblue;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>객체 2</h1>
+        
+        <h3>생성자 함수</h3>
+        <pre>
+            - 객체를 생성하는 함수
+            - 일반적인 함수와 다르게 호출 시 new 연산자를 사용하며
+              호출 결과로 객체를 얻을 수 있다.
+            - 생성자 함수 사용 시 동일한 속성과 메소드를 가진 객체를 다수 만들 수 있다.
+
+        </pre>
+        <button onclick="test1()">실행</button>
+        <div id="area1" class="area"></div>
+        <script>
+            // 생성자 함수 선언 
+            // -> 생성자 함수의 함수명은 첫글자가 대문자이다.
+            function Student(name, java, oracle, jdbc, html){
+                
+                // 속성 정의
+                this.name=name;
+                // this.name : Student 객체의 속성
+                // name : 매개변수로 전달받은 값 
+
+                this.java=java;
+                this.oracle=oracle;
+                this.jdbc=jdbc;
+                this.html=html;
+
+                // 메소드 정의
+                this.getSum = function(){
+                    return this.java + this.oracle + this.jdbc + this.html;
+                }
+
+                // 오벌이딩도 가능
+                this.toString = function(){
+                    return this.name + "의 점수 정보 입니다 : " + this.java + "/" 
+                        +this.oracle + "/" + this.jdbc + "/" + this.html + "<br>";
+
+                }   
+                
+            }
+
+            function test1(){
+                var std1 = new Student("홍길동",80,70,60,100);
+          
+                document.getElementById("area1").innerHTML = std1;
+                document.getElementById("area1").innerHTML += std1.getSum();
+            }
+        </script>
+        <hr>
+        <h3>객체 배열을 이용한 데이터 관리</h3>
+        <button onclick="test2()">실행</button>
+        <div id="area2" class="area"></div>
+        <script>
+            function test2(){
+            // 배열 선언
+            var students = [];
+
+            // push() : 배열 제일 뒤에 추가 
+            students.push(new Student('박선우',100,70,100,50));
+            students.push(new Student('오형석',10,50,100,100));
+            students.push(new Student('임이슬',70,100,100,70));
+            students.push(new Student('이지산',50,100,100,30));
+            students.push(new Student('서여진',100,100,80,20));
+
+            console.log(students);
+
+            // 각 객체에 평균을 계산하는 메소드 속성 추가 
+            for(var i=0; i<students.length; i++){
+                students[i].getAvg = function(){
+                    return this.getSum()/4;
+                }
+            }
+
+            // 모든 학생의 이름, 총점, 평균 출력
+            for(var i in students){
+                document.getElementById("area2").innerHTML
+                +="이름 : " + students[i].name
+                +"/총점 : " + students[i].getSum()
+                +"/평균 : " + students[i].getAvg() + "<br>";
+            }
+            }
+        </script>
+    </body>
+</html>

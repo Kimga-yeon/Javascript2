@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>연습문제 hint</title>
+        <style>
+            .area{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>2번 hint</h3>
+        <input type="range" id="level" name="level" min="1" max="5" step="1">
+        <input type="text" id="levelOutput" name="levelOutpt" readonly>
+        <script>
+            document.getElementById("level").oninput = function(){
+                document.getElementById("levelOutput").value = this.value + "등급";
+            }
+        </script>
+
+        <hr>
+
+        <label for="radio1">area1</label>
+        <input type="radio" name="radio" id="radio1" value="area1" onclick="showDiv(this);">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label for="radio2">area2</label>
+        <input type="radio" name="radio" id="radio2" value="area2"onclick="showDiv(this);">
+        <div id="area1" class="area">
+            <img src="8282.gif">
+        </div>
+        <div id="area2" class="area">
+            <img src="아닌뒈에.gif">
+        </div>
+
+        <script>
+            function showDiv(el){
+                var area = document.getElementsByClassName("area");
+
+                for(var i=0 ; i<area.length ; i++){
+                    if(el.checked == true && el.value == area[i].id){
+                        area[i].style.display = "block";
+                    }else{
+                        area[i].style.display = "none";
+                    }
+
+                }
+            }
+        </script>
+    </body>
+</html>

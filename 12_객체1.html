@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>12.객체 1</title>
+        <style>
+            .area{
+                height: 200px;
+                border: 1px solid black;
+                background-color: skyblue;
+            }
+
+            .big{
+                height: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1> 객체 1</h1>
+        <h3> 객체 선언 및 속성 호출</h3>
+        <pre>
+            자바스크립트의 객체는 Key:Value의 형태를 띄고 있으며,
+            객체는 {}(중괄호, 객체 리터럴 표기법) 또는 new연산자를 이용하여 생성 할 수 있다.
+            Value(속성)에는 모든 자료형이 올 수 있다.   
+
+        </pre>
+        <button onclick="test1()">실행</button>
+        <div id="area1" class="area"></div>
+        <script>
+            function test1(){
+                var product = {
+                    pName: "목캔디",
+                    ingredient: ["설탕","허브추출물","모과"]
+                };
+            var area1 = document.getElementById("area1");
+            area1.innerHTML = "";
+
+            area1.innerHTML += "<b>객체명.속성명으로 접근하기</b><br>"
+            area1.innerHTML += "product.pName : " + product.pName + "<br>";
+            area1.innerHTML += "product.ingredient : " + product.ingredient + "<br>";
+            area1.innerHTML += "product.ingredient[0] : " + product.ingredient[0] + "<br>";
+           
+            area1.innerHTML += "<b>객체명['속성명']으로 접근하기</b><br>"
+            area1.innerHTML += "product['pName'] : " + product['pName'] + "<br>";
+            area1.innerHTML += "product['ingredient'] : " + product['ingredient'] + "<br>";
+            area1.innerHTML += "product[ingredient'][0] : " + product['ingredient'][0] + "<br>";
+            
+             }
+
+        </script> 
+        <hr>
+        <h3>객체의 메소드 속성</h3>
+        <pre>
+            객체의 속성 중 타입이 함수(function)인 속성을 메소드라고 부른다.
+        </pre>
+        <button onclick="test2()">실행</button>
+        <div id="area2" class="area" ></div>
+        <script>
+            function test2(){
+                var area2 = document.getElementById("area2");
+
+                var dog = {
+                    name : "할리퀸",
+                    action : function(food){
+                        // 객체 내 속성 중 타입이 function인 속성 == 메소드
+                        area2.innerHTML = this.name + "은/는 " + food + "안주면 물어요";
+                    }
+                }
+
+                dog.action("개껌");
+            }
+
+        </script>
+        <hr>
+        <h3>객체와 반복문</h3>
+        <pre>
+            for in문 : 객체의 속성을 순차적으로 접근하는 반복문 
+        </pre>
+        <button onclick="test3()">실행</button>
+        <div id="area3" class="area" ></div>
+        <script>
+            function test3(){
+                var game = {
+                    title : "LOL",
+                    language : "한국어지원",
+                    supportOs : ["windows","macOs","Linux"],
+                    service : true 
+                };
+                console.log(game);
+
+                for(var key in game){
+                    area3.innerHTML += key + ":" + game[key] + "<br>";
+
+                }
+            }
+
+        </script> 
+        <hr>
+        <h3>객체의 속성 추가 또는 제거</h3>
+        <pre>
+            처음 객체 생성 이후 속성을 추가하거나 제거하는 것을 
+            "동적으로 속성 추가 또는 제거"라고 한다.
+        </pre>
+        <button onclick="test4()">실행</button>
+        <script>
+            function test4(){
+                // 비어있는 객체 선언 
+                var student = {};
+
+                console.log(student);
+
+                // 객체에 속성을 동적으로 추가
+                // -> 점 연산자를 사용하여 객체의 속성에 접근할 때
+                //    해당 속성이 없으면 자동으로 추가됨. 
+                student.name = "홍길동";
+                student.hobby = "의적질";
+                console.log(student);
+
+                // 객체 속성 제거 
+                delete(student.hobby);
+                console.log(student);
+
+
+            }
+        </script>
+    </body>
+</html>

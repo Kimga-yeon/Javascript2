@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>14.내장 객체</title>
+        <style>
+            .area{
+                height: 200px;
+                border: 1px solid black;
+                background-color: skyblue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>자바스크립트 내장 객체</h1>
+        <h3>Date 객체</h3>
+        <p>날짜를 관리하는 객체</p>
+        <button onclick="test1()">실행</button>
+        <div id="area1" class="area"></div>
+        <script>
+            function test1(){
+                var area1 = document.getElementById("area1");
+
+                // 현재 시간 
+                var date1 = new Date();
+                
+                // new Date(dateString)
+                var date2 = new Date('june 19');
+                var date3 = new Date('june 19, 2020');
+                var date4 = new Date('june 19, 2020 09:30:23');
+
+                // new Date(year, month-1, day, hours, minutes, seconds, milliseconds)
+                var date5 = new Date(2020, 5, 18);
+                var date6 = new Date(2020, 5, 18, 9, 30, 23);
+                var date7 = new Date('2020, 6, 18, 9:30:23');
+
+                area1.innerHTML = "Date() : " + date1 + "<br>";
+                area1.innerHTML += "Date('june 19') : " + date2 + "<br>";
+                area1.innerHTML += "Date('june 19, 2020') : " + date3 + "<br>";
+                area1.innerHTML += "Date('june 19, 2020 09:30:23') : " + date4 + "<br>";
+
+                area1.innerHTML += "Date(2020, 5, 18) : " + date5 + "<br>";
+                area1.innerHTML += "Date(2020, 5, 18, 9, 30, 23) : " + date6 + "<br>";
+                area1.innerHTML += "Date('2020, 6, 18, 9:30:23') : " + date7 + "<br>";
+
+            }
+        </script>
+
+        <hr>
+
+        <h3>Date 객체의 메소드</h3>
+        <button id="test2">실행</button>
+        <div id="area2" class="area"></div>
+        <script>
+            document.getElementById("test2").onclick=function(){
+                var area2 = document.getElementById("area2");
+
+                var date = new Date();
+
+                area2.innerHTML = "현재 시간 : " + date + "<br>";
+                area2.innerHTML += "getFullYear() : " + date.getFullYear() + "<br>";
+                area2.innerHTML += "getMonth() : " + (date.getMonth()+1) + "<br>";
+                area2.innerHTML += "getDate() : " + date.getDate() + "<br>";
+                area2.innerHTML += "getDay() : " + date.getDay() + "<br>";
+                // 일요일 : 0 ~ 토요일 : 6 
+                area2.innerHTML += "getHours() : " + date.getHours() + "<br>";
+                area2.innerHTML += "getMinutes() : " + date.getMinutes() + "<br>";
+                area2.innerHTML += "getSeconds() : " + date.getSeconds() + "<br>";
+                area2.innerHTML += "getMilliseconds() : " + date.getMilliseconds() + "<br>";
+
+                // 1970년 1월 1일 09:00:00 부터 date에 지정된 시간까지의 ms 구하는 방법 
+                console.log("getTime() : " + date.getTime() );
+
+                // 날짜 사이의 간격 구하기
+                var now = new Date();
+                var start = new Date('2020, 4, 8');
+                var end = new Date('2020,9,28');
+
+                var interval1 = now.getTime() - start.getTime();
+                var interval2 = end.getTime() - now.getTime();
+
+                var time1 = Math.floor(interval1 / (1000 * 60 * 60 * 24) );
+                var time2 = Math.ceil(interval1 / (1000 * 60 * 60 * 24) );
+
+                alert("개강한지" + time1 + "일 째 입니다.\n"  +
+                      "종강까지" + time2 + "일 남았습니다.")
+
+                
+                
+
+                
+            }
+        </script>
+
+    </body>
+</html>
